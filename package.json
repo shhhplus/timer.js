@@ -1,5 +1,5 @@
 {
-  "name": "easy-timer",
+  "name": "timer.js",
   "version": "0.0.1",
   "description": "this timer is very easy!",
   "keywords": [
@@ -15,11 +15,11 @@
     "name": "shhhplus"
   },
   "bugs": {
-    "url": "https://github.com/shhhplus/easy-timer/issues"
+    "url": "https://github.com/shhhplus/timer.js/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/shhhplus/easy-timer.git"
+    "url": "https://github.com/shhhplus/timer.js.git"
   },
   "dependencies": {
     "rollup": "^1.25.0"
