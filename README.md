@@ -1,4 +1,4 @@
-# easy-timer
+# timer.js
 
 ## Introduction
 
