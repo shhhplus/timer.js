@@ -13,22 +13,30 @@ this timer is very easy!
 ### sync
 
 ```javascript
-import Timer from '@shhhplus/timer.js';
+import createTimer from '@shhhplus/timer.js';
 
-const timer = new Timer({
+// init
+const timer = createTimer({
   interval: 1000,
   onElapsed: () => {
     console.log('onElapsed');
   },
 });
+
+// start
+timer.start();
+
+// stop
+timer.stop();
 ```
 
 ### async
 
 ```javascript
-import Timer from '@shhhplus/timer.js';
+import createTimer from '@shhhplus/timer.js';
 
-const timer = new Timer({
+// init
+const timer = createTimer({
   interval: 5000,
   onElapsed: () => {
     console.log('onElapsed');
@@ -41,4 +49,10 @@ const timer = new Timer({
     });
   },
 });
+
+// start
+timer.start();
+
+// stop
+timer.stop();
 ```
