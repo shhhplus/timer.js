@@ -1,4 +1,4 @@
-# timer.js
+# timer.js &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/shhhplus/timer.js/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/@shhhplus/timer.js.svg?style=flat)](https://www.npmjs.com/package/@shhhplus/timer.js)
 
 ## Introduction
 
@@ -6,7 +6,7 @@ this timer is very easy!
 
 ## Install
 
-`npm install @shhhplus/timer.js`
+`npm install @shhhplus/timer.js --save`
 
 ## How to use
 
@@ -40,7 +40,7 @@ const timer = createTimer({
   interval: 5000,
   onElapsed: () => {
     console.log('onElapsed');
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       // mock api call
       setTimeout(() => {
         // Start timing after the asynchronous operation is completed
