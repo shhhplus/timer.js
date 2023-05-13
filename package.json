@@ -1,7 +1,7 @@
 {
   "name": "timer.js",
-  "version": "1.0.0",
-  "description": "This timer is very easy!",
+  "version": "1.0.1",
+  "description": "This timer is very simple and framework independent.",
   "keywords": [
     "timer",
     "promise",
@@ -9,7 +9,7 @@
     "setTimeout",
     "setInterval"
   ],
-  "homepage": "https://github.com/shhhplus",
+  "homepage": "https://github.com/shhhplus/timer.js",
   "license": "MIT",
   "main": "./src/index.js",
   "author": {

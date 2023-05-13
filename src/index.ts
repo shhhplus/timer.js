@@ -7,6 +7,10 @@ export default ({ interval, onElapsed }: Options) => {
   let timer: NodeJS.Timeout | null = null;
 
   const start = () => {
+    if (interval <= 0) {
+      return;
+    }
+
     if (timer) {
       return;
     }
