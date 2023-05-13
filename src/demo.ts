@@ -7,9 +7,9 @@ const timer = createTimer({
   },
 });
 console.log('timer start');
-timer.start();
+timer?.start();
 
 setTimeout(() => {
   console.log('timer stop');
-  timer.stop();
+  timer?.stop();
 }, 20000);

@@ -1,0 +1,20 @@
+name: Publish
+
+on: workflow_call
+
+jobs:
+  base-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo The PR was merged
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          path: dist
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm publish ./dist --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
