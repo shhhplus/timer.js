@@ -3,7 +3,7 @@ type Options = {
   onElapsed: () => any;
 };
 
-export default ({ onElapsed, interval }: Options) => {
+export default ({ interval, onElapsed }: Options) => {
   let timer: NodeJS.Timeout | null = null;
 
   const start = () => {

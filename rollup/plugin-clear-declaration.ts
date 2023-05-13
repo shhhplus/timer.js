@@ -1,19 +1,25 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
-export default ({ folder, requirements }) => {
+type Options = {
+  folder: string;
+  requirements: string[];
+};
+
+export default ({ folder, requirements }: Options) => {
   return {
     name: 'clear-declaration',
-    writeBundle: (options, bundle) => {
+    writeBundle: () => {
       const oldFolder = path.join(process.cwd(), folder);
       const tempFolder = path.join(process.cwd(), `${folder}-${Date.now()}`);
 
       fs.mkdirSync(tempFolder);
 
       for (let filePath of requirements) {
+        const obj = path.parse(filePath);
         fs.copyFileSync(
           path.join(folder, filePath),
-          path.join(tempFolder, filePath),
+          path.join(tempFolder, obj.base),
         );
       }
 

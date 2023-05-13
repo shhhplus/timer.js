@@ -1,12 +1,13 @@
+import fs from 'node:fs';
+import { URL } from 'node:url';
 import resolve from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
 import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
-import clear from 'rollup-plugin-clear';
+import copy from 'rollup-plugin-copy';
+import del from 'rollup-plugin-delete';
 import clearDeclaration from './plugin-clear-declaration';
-import createReadme from './plugin-create-readme';
 import createPackageJson from './plugin-create-package-json';
-import originalPackageInfo from '../package.json';
 
 export default {
   input: './src/index.ts',
@@ -16,8 +17,8 @@ export default {
     format: 'umd',
   },
   plugins: [
-    clear({
-      targets: ['./dist'],
+    del({
+      targets: './dist',
     }),
     resolve(),
     typescript({
@@ -29,15 +30,24 @@ export default {
     terser(),
     clearDeclaration({
       folder: './dist/types',
-      requirements: ['index.d.ts'],
+      requirements: ['./src/index.d.ts'],
     }),
-    createReadme({
-      dist: './dist',
+    copy({
+      targets: [
+        {
+          src: ['./README.md', './LICENSE'],
+          dest: './dist',
+        },
+      ],
     }),
     createPackageJson({
       dist: './dist',
       basic: {
-        data: originalPackageInfo,
+        data: JSON.parse(
+          fs
+            .readFileSync(new URL('../package.json', import.meta.url))
+            .toString(),
+        ),
         keys: [
           'version',
           'description',

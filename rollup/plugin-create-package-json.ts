@@ -1,10 +1,23 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
-export default ({ dist, basic, extra }) => {
+type Options = {
+  dist: string;
+  basic: {
+    data: {
+      [P in string]: any;
+    };
+    keys: string[];
+  };
+  extra: {
+    [P in string]: any;
+  };
+};
+
+export default ({ dist, basic, extra }: Options) => {
   return {
     name: 'create-package-json',
-    writeBundle: async (options, bundle) => {
+    writeBundle: async () => {
       const sortPackageJson = await import('sort-package-json');
       const keys = new Set(Object.keys(basic.data));
       const obj = basic.keys.reduce((acc, cur) => {

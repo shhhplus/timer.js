@@ -2,7 +2,7 @@
 
 ## Introduction
 
-this timer is very easy!
+This timer is very easy!
 
 ## Install
 
