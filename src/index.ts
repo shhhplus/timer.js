@@ -3,7 +3,22 @@ type Options = {
   onElapsed: () => any;
 };
 
+const doTask = (task: Options['onElapsed']) => {
+  return new Promise<unknown>((resolve, reject) => {
+    const res = task();
+    if (res instanceof Promise) {
+      res.then(resolve, reject);
+    } else {
+      resolve(null);
+    }
+  });
+};
+
 export default ({ interval, onElapsed }: Options) => {
+  if (interval <= 0) {
+    return null;
+  }
+
   let timer: NodeJS.Timeout | null = null;
 
   const start = () => {
@@ -11,24 +26,10 @@ export default ({ interval, onElapsed }: Options) => {
       return;
     }
 
-    const once = () => {
-      return new Promise<unknown>(function (resolve, reject) {
-        const res = onElapsed();
-        if (res instanceof Promise) {
-          res.then(resolve, reject);
-        } else {
-          resolve(null);
-        }
-      });
-    };
-
-    const next = function () {
-      timer = setTimeout(function () {
-        once().then(function () {
-          if (!timer) {
-            return;
-          }
-          next();
+    const next = () => {
+      timer = setTimeout(() => {
+        doTask(onElapsed).then(() => {
+          timer && next();
         });
       }, interval);
     };

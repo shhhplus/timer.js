@@ -1,0 +1,19 @@
+name: CD
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - closed
+jobs:
+  test:
+    uses: './.github/workflows/base.test.yml'
+
+  build:
+    needs: [test]
+    uses: './.github/workflows/base.build.yml'
+
+  pubish:
+    if: ${{ github.ref == 'refs/heads/master' && github.event.pull_request.merged == true }}
+    needs: [build]
+    uses: './.github/workflows/base.publish.yml'

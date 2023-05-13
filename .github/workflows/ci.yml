@@ -1,0 +1,12 @@
+name: CI
+on:
+  push:
+    branches-ignore:
+      - master
+jobs:
+  test:
+    uses: './.github/workflows/base.test.yml'
+
+  build:
+    needs: [test]
+    uses: './.github/workflows/base.build.yml'
