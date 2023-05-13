@@ -1,12 +1,12 @@
-# timer.js &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/shhhplus/timer.js/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/@shhhplus/timer.js.svg?style=flat)](https://www.npmjs.com/package/@shhhplus/timer.js)
+# timer.js &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/shhhplus/timer.js/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/@shhhplus/timer.js.svg?style=flat)](https://www.npmjs.com/package/@shhhplus/timer.js) [![codecov](https://img.shields.io/codecov/c/github/shhhplus/timer.js/master?token=EMW62R8Q78)](https://codecov.io/gh/shhhplus/timer.js) [![build status](https://img.shields.io/github/actions/workflow/status/shhhplus/timer.js/ci.yml?branch=master)](https://github.com/shhhplus/timer.js)
 
-## Introduction
-
-This timer is very easy!
+This timer is very simple and framework independent.
 
 ## Install
 
-`npm install @shhhplus/timer.js --save`
+```
+npm install @shhhplus/timer.js --save
+```
 
 ## How to use
 
@@ -19,7 +19,7 @@ import createTimer from '@shhhplus/timer.js';
 const timer = createTimer({
   interval: 1000,
   onElapsed: () => {
-    console.log('onElapsed');
+    console.log('onElapsed ...');
   },
 });
 
@@ -39,13 +39,9 @@ import createTimer from '@shhhplus/timer.js';
 const timer = createTimer({
   interval: 5000,
   onElapsed: () => {
-    console.log('onElapsed');
+    console.log('onElapsed ...');
     return new Promise((resolve) => {
-      // mock api call
-      setTimeout(() => {
-        // Start timing after the asynchronous operation is completed
-        resolve();
-      }, 500);
+      setTimeout(resolve, 500);
     });
   },
 });
