@@ -1,7 +1,7 @@
 {
   "name": "timer.js",
   "version": "1.0.0",
-  "description": "this timer is very easy!",
+  "description": "This timer is very easy!",
   "keywords": [
     "timer",
     "promise",
@@ -24,7 +24,7 @@
   },
   "scripts": {
     "test": "jest --coverage",
-    "build": "rollup --config ./rollup/rollup.config.mjs --bundleConfigAsCjs"
+    "build": "rollup --config ./rollup/rollup.config.ts --configPlugin @rollup/plugin-typescript --bundleConfigAsCjs"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
@@ -37,7 +37,8 @@
     "@types/jest": "^29.5.1",
     "jest": "^29.5.0",
     "rollup": "^3.21.6",
-    "rollup-plugin-clear": "^2.0.7",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-delete": "^2.0.0",
     "sort-package-json": "^2.4.1",
     "tslib": "^2.5.0",
     "typescript": "^5.0.4"
