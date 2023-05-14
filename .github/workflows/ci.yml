@@ -1,0 +1,23 @@
+name: CI
+on:
+  push:
+    branches-ignore:
+      - master
+  pull_request:
+    branches:
+      - master
+    types:
+      - opened
+jobs:
+  show:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ github.ref }}
+
+  test:
+    needs: [show]
+    uses: './.github/workflows/base.test.yml'
+
+  build:
+    needs: [test]
+    uses: './.github/workflows/base.build.yml'

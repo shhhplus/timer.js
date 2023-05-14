@@ -1,0 +1,32 @@
+name: CD
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - closed
+jobs:
+  show:
+    if: ${{ github.event.pull_request.merged == true }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ github.ref }}
+
+  test:
+    if: ${{ github.event.pull_request.merged == true }}
+    needs: [show]
+    uses: './.github/workflows/base.test.yml'
+
+  build:
+    if: ${{ github.event.pull_request.merged == true }}
+    needs: [test]
+    uses: './.github/workflows/base.build.yml'
+
+  pubish:
+    if: ${{ github.event.pull_request.merged == true }}
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo The PR was merged
+      - run: ls -l
+      - uses: './.github/workflows/base.publish.yml'
