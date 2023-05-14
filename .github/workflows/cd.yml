@@ -6,15 +6,15 @@ on:
     types:
       - closed
 jobs:
-  show:
-    if: ${{ github.event.pull_request.merged == true }}
+  show_info:
     runs-on: ubuntu-latest
     steps:
       - run: echo ${{ github.ref }}
+      - run: echo ${{ github.event.pull_request.merged }}
 
   test:
     if: ${{ github.event.pull_request.merged == true }}
-    needs: [show]
+    needs: [show_info]
     uses: './.github/workflows/base.test.yml'
 
   build:
@@ -25,8 +25,4 @@ jobs:
   pubish:
     if: ${{ github.event.pull_request.merged == true }}
     needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo The PR was merged
-      - run: ls -l
-      - uses: './.github/workflows/base.publish.yml'
+    uses: './.github/workflows/base.publish.yml'
