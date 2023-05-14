@@ -1,18 +1,18 @@
 name: Build
-
 on: workflow_call
-
 jobs:
-  base-build:
+  base_build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Install Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
       - run: npm i
       - run: npm run build
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
+      - run: echo "my_repo_name=$(echo ${{ github.repository }} | awk -F '/' '{print $2}')" >> $GITHUB_ENV
+        # run: echo repo_name=$(echo ${{ github.repository }} | awk -F '/' '{print $2}')
+        # run: echo ::set-output name=repo_name::$(echo ${{ github.repository }} | awk -F '/' '{print $2}')
+      - run: echo ${{ env.my_repo_name }}
+      - uses: actions/upload-artifact@v3
         with:
-          path: dist
+          name: ${{ env.my_repo_name }}
+          path: dist/

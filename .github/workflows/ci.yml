@@ -9,13 +9,14 @@ on:
     types:
       - opened
 jobs:
-  show:
+  show_info:
     runs-on: ubuntu-latest
     steps:
       - run: echo ${{ github.ref }}
+      - run: echo ${{ github.repository }}
 
   test:
-    needs: [show]
+    needs: [show_info]
     uses: './.github/workflows/base.test.yml'
 
   build:
