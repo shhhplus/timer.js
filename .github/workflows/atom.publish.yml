@@ -10,14 +10,18 @@ jobs:
         with:
           path: dist
       - uses: actions/setup-node@v3
+        # with:
+        #   registry-url: 'https://registry.npmjs.org'
+      # - run: ls -l
+      # - name: publish to npm
+      #   run: |
+      #     cd dist/${{ env.my_repo_name }}
+      #     pwd
+      #     ls -l
+      #     npm publish --access public --dry-run
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - uses: JS-DevTools/npm-publish@v2
         with:
-          registry-url: 'https://registry.npmjs.org'
-      - run: ls -l
-      - name: publish to npm
-        run: |
-          cd dist/${{ env.my_repo_name }}
-          pwd
-          ls -l
-          npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          token: ${{ secrets.NPM_TOKEN }}
+          package: dist/${{ env.my_repo_name }}
