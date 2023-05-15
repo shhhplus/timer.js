@@ -23,3 +23,7 @@ jobs:
   build:
     needs: [test]
     uses: './.github/workflows/atom.build.yml'
+
+  publish:
+    needs: [build]
+    uses: './.github/workflows/atom.publish.yml'
