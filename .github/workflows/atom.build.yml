@@ -1,16 +1,19 @@
 name: Atom Build
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      repo_name:
+        required: true
+        type: string
 jobs:
-  atom_build:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
       - run: npm i
       - run: npm run build
-      - run: echo "my_repo_name=$(echo ${{ github.repository }} | cut -d'/' -f 2-)" >> $GITHUB_ENV
-      - run: echo [my_repo_name] ${{ env.my_repo_name }}
       - uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.my_repo_name }}
-          path: dist/
+          name: ${{ inputs.repo_name }}
+          path: dist
