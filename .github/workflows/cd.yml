@@ -6,23 +6,30 @@ on:
     types:
       - closed
 jobs:
-  show_info:
+  info:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ github.ref }}
-      - run: echo ${{ github.event.pull_request.merged }}
+      - run: echo [repositoryUrl] ${{ github.repositoryUrl }}
+      - run: echo [ref] ${{ github.ref }}
+      - run: echo [event_name] ${{ github.event_name }}
+      - run: echo [pull_request.merged] ${{ github.event.pull_request.merged }}
 
   test:
     if: ${{ github.event.pull_request.merged == true }}
-    needs: [show_info]
-    uses: './.github/workflows/base.test.yml'
+    needs: [info]
+    uses: './.github/workflows/atom.test.yml'
 
   build:
     if: ${{ github.event.pull_request.merged == true }}
     needs: [test]
-    uses: './.github/workflows/base.build.yml'
+    uses: './.github/workflows/atom.build.yml'
 
-  pubish:
+  publish:
     if: ${{ github.event.pull_request.merged == true }}
     needs: [build]
-    uses: './.github/workflows/base.publish.yml'
+    uses: './.github/workflows/atom.publish.yml'
+
+  tag:
+    if: ${{ github.event.pull_request.merged == true }}
+    needs: [publish]
+    uses: './.github/workflows/atom.tag.yml'

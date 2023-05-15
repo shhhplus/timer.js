@@ -1,0 +1,29 @@
+name: Publish
+on: workflow_call
+jobs:
+  base_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "my_repo_name=$(echo ${{ github.repository }} | cut -d'/' -f 2-)" >> $GITHUB_ENV
+      - run: echo [my_repo_name] ${{ env.my_repo_name }}
+      - uses: actions/download-artifact@v3
+        with:
+          path: dist
+      - uses: actions/setup-node@v3
+        # with:
+        #   registry-url: 'https://registry.npmjs.org'
+      - run: ls -l
+      # - name: publish to npm
+      #   run: |
+      #     cd dist/${{ env.my_repo_name }}
+      #     pwd
+      #     ls -l
+      #     npm publish --access public
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: publish to npm 2
+        run: |
+          cd dist/${{ env.my_repo_name }}
+          pwd
+          ls -l
+          npm publish --registry https://registry.npmjs.org/:_authToken=$${NODE_AUTH_TOKEN}} --access public

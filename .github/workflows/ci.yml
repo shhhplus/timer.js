@@ -9,16 +9,17 @@ on:
     types:
       - opened
 jobs:
-  show_info:
+  info:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ github.ref }}
-      - run: echo ${{ github.repository }}
+      - run: echo [repositoryUrl] ${{ github.repositoryUrl }}
+      - run: echo [ref] ${{ github.ref }}
+      - run: echo [event_name] ${{ github.event_name }}
 
   test:
-    needs: [show_info]
-    uses: './.github/workflows/base.test.yml'
+    needs: [info]
+    uses: './.github/workflows/atom.test.yml'
 
   build:
     needs: [test]
-    uses: './.github/workflows/base.build.yml'
+    uses: './.github/workflows/atom.build.yml'
