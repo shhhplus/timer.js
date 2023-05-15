@@ -21,6 +21,6 @@ jobs:
           cd dist/${{ inputs.repo_name }}
           pwd
           ls -l
-          npm publish --access public --dry-run
+          npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
