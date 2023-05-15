@@ -21,7 +21,7 @@ jobs:
     uses: './.github/workflows/atom.test.yml'
 
   build:
-    needs: [test]
+    needs: [info]
     uses: './.github/workflows/atom.build.yml'
 
   publish:

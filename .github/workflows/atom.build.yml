@@ -1,7 +1,7 @@
-name: Build
+name: Atom Build
 on: workflow_call
 jobs:
-  base_build:
+  atom_build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

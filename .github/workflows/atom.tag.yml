@@ -1,7 +1,7 @@
-name: Tag
+name: Atom Tag
 on: workflow_call
 jobs:
-  base_tag:
+  atom_tag:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
