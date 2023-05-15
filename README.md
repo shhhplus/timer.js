@@ -24,10 +24,10 @@ const timer = createTimer({
 });
 
 // start
-timer.start();
+timer?.start();
 
 // stop
-timer.stop();
+timer?.stop();
 ```
 
 ### async
@@ -47,8 +47,8 @@ const timer = createTimer({
 });
 
 // start
-timer.start();
+timer?.start();
 
 // stop
-timer.stop();
+timer?.stop();
 ```

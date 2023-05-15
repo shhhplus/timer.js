@@ -1,27 +1,26 @@
-name: Publish
-on: workflow_call
+name: Atom Publish
+on:
+  workflow_call:
+    inputs:
+      repo_name:
+        required: true
+        type: string
 jobs:
-  base_publish:
+  publish:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "my_repo_name=$(echo ${{ github.repository }} | cut -d'/' -f 2-)" >> $GITHUB_ENV
-      - run: echo [my_repo_name] ${{ env.my_repo_name }}
       - uses: actions/download-artifact@v3
         with:
           path: dist
       - uses: actions/setup-node@v3
-        # with:
-        #   registry-url: 'https://registry.npmjs.org'
-      # - run: ls -l
-      # - name: publish to npm
-      #   run: |
-      #     cd dist/${{ env.my_repo_name }}
-      #     pwd
-      #     ls -l
-      #     npm publish --access public --dry-run
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - uses: JS-DevTools/npm-publish@v2
         with:
-          token: ${{ secrets.NPM_TOKEN }}
-          package: dist/${{ env.my_repo_name }}
+          registry-url: 'https://registry.npmjs.org'
+      - run: ls -l
+      - name: publish to npm
+        run: |
+          cd dist/${{ inputs.repo_name }}
+          pwd
+          ls -l
+          npm publish --access public --dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
