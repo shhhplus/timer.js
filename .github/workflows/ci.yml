@@ -8,6 +8,7 @@ on:
       - master
     types:
       - opened
+      - reopened
 jobs:
   info:
     runs-on: ubuntu-latest

@@ -16,7 +16,10 @@ const doTask = (task: Options['onElapsed']) => {
 
 export default ({ interval, onElapsed }: Options) => {
   if (interval <= 0) {
-    return null;
+    return {
+      start: () => {},
+      stop: () => {},
+    };
   }
 
   let timer: NodeJS.Timeout | null = null;
