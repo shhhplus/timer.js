@@ -4,7 +4,7 @@ This timer is very simple and framework independent.
 
 ## Install
 
-```
+```sh
 npm install @shhhplus/timer.js --save
 ```
 
@@ -15,7 +15,6 @@ npm install @shhhplus/timer.js --save
 ```javascript
 import createTimer from '@shhhplus/timer.js';
 
-// init
 const timer = createTimer({
   interval: 1000,
   onElapsed: () => {
@@ -23,11 +22,9 @@ const timer = createTimer({
   },
 });
 
-// start
-timer?.start();
+timer.start();
 
-// stop
-timer?.stop();
+timer.stop();
 ```
 
 ### async
@@ -35,7 +32,6 @@ timer?.stop();
 ```javascript
 import createTimer from '@shhhplus/timer.js';
 
-// init
 const timer = createTimer({
   interval: 5000,
   onElapsed: () => {
@@ -46,9 +42,7 @@ const timer = createTimer({
   },
 });
 
-// start
-timer?.start();
+timer.start();
 
-// stop
-timer?.stop();
+timer.stop();
 ```
