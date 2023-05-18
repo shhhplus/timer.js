@@ -136,7 +136,7 @@ test('async onElapsed should be called', (done) => {
   }, duration2stop);
 });
 
-test('stop timer before onElapsed is finished should work', (done) => {
+test('stop timer before onElapsed is finished should works', (done) => {
   const mockFn = jest.fn(() => {});
 
   const interval = 100;

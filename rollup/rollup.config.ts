@@ -9,6 +9,10 @@ import del from 'rollup-plugin-delete';
 import clearDeclaration from './plugin-clear-declaration';
 import createPackageJson from './plugin-create-package-json';
 
+const packageinfo = JSON.parse(
+  fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'),
+);
+
 export default {
   input: './src/index.ts',
   output: {
@@ -21,9 +25,7 @@ export default {
       targets: './dist',
     }),
     resolve(),
-    typescript({
-      tslib: require.resolve('tslib'),
-    }),
+    typescript(),
     babel({
       babelHelpers: 'bundled',
     }),
@@ -43,11 +45,7 @@ export default {
     createPackageJson({
       dist: './dist',
       basic: {
-        data: JSON.parse(
-          fs
-            .readFileSync(new URL('../package.json', import.meta.url))
-            .toString(),
-        ),
+        data: packageinfo,
         keys: [
           'version',
           'description',
